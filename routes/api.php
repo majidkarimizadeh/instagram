@@ -13,6 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+$prefix = '/v1';
+
+Route::group([
+	'prefix'	=>	$prefix
+], 
+function()
+{
+	Route::post('login', [
+		'as'	=>	'login',
+		'uses'	=>	'Auth\AuthController@login'
+	]);
+});
+
+Route::group([
+	// 'middleware' => 'auth:api',
+	'prefix'	=>	$prefix
+], 
+function()
+{
+    Route::post('logout', 'Auth\AuthController@logout');
 });

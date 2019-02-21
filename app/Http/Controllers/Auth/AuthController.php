@@ -21,9 +21,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'token' =>  $token,
-                'user'  =>  collect($user->toArray())
-                            ->only(['full_name', 'img'])
-                            ->all()
+                'user'  =>  $user
             ]);
         }
         else
